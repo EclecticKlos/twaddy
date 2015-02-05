@@ -6,6 +6,42 @@ require ::File.expand_path('../config/environment', __FILE__)
 require 'active_support/core_ext'
 
 namespace :generate do
+  desc "Create RESTful routes for NOUN"
+    task :controller do
+      unless ENV.has_key?('NOUN')
+        raise "Must specify controller name, e.g., rake generate:controller NOUN=category"
+      end
+
+      require 'active_support/inflector'
+      noun = ActiveSupport::Inflector.pluralize(ENV['NOUN'])
+
+      file_contents = <<-CONTROLLER
+        # get a list of #{noun}
+        get '/#{noun}' do
+        end
+        # get a form to add a new #{noun}
+        get '/#{noun}/new' do
+        end
+        # add a new #{noun}
+        post '/#{noun}' do
+        end
+        # get a specific instance of #{noun}
+        get '/#{noun}/:id' do
+        end
+        # get a form to edit a specific instance of #{noun}
+        get '/#{noun}/:id/edit' do
+        end
+        # edit a specific instance of #{noun}
+        put '/#{noun}/:id' do
+        end
+        # delete a specific instance of #{noun}
+        delete '/#{noun}/:id' do
+        end
+      CONTROLLER
+      controller_path = APP_ROOT.join('app', 'controllers', "#{ENV['NOUN']}.rb")
+      File.write(controller_path, file_contents)
+    end
+    
   desc "Create an empty model in app/models, e.g., rake generate:model NAME=User"
   task :model do
     unless ENV.has_key?('NAME')
