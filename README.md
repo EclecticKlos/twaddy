@@ -18,3 +18,6 @@ A user can see others' profile pages
 A user can link a gravatar image
 A user has a profile page
 Add your own user stories
+
+<img src="imgs/follower_table.png">
+<img src="imgs/schema.png">
