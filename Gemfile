@@ -15,6 +15,10 @@ gem 'rake'
 
 gem 'thin'
 
+gem 'bcrypt'
+
+gem 'gravatarify', '~> 3.0.0'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
