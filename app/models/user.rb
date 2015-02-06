@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def authenticate(password)
+    self.password == password
+  end
+
 
 
 end
