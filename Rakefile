@@ -7,41 +7,41 @@ require 'active_support/core_ext'
 
 namespace :generate do
   desc "Create RESTful routes for NOUN"
-    task :controller do
-      unless ENV.has_key?('NOUN')
-        raise "Must specify controller name, e.g., rake generate:controller NOUN=category"
-      end
-
-      require 'active_support/inflector'
-      noun = ActiveSupport::Inflector.pluralize(ENV['NOUN'])
-
-      file_contents = <<-CONTROLLER
-        # get a list of #{noun}
-        get '/#{noun}' do
-        end
-        # get a form to add a new #{noun}
-        get '/#{noun}/new' do
-        end
-        # add a new #{noun}
-        post '/#{noun}' do
-        end
-        # get a specific instance of #{noun}
-        get '/#{noun}/:id' do
-        end
-        # get a form to edit a specific instance of #{noun}
-        get '/#{noun}/:id/edit' do
-        end
-        # edit a specific instance of #{noun}
-        put '/#{noun}/:id' do
-        end
-        # delete a specific instance of #{noun}
-        delete '/#{noun}/:id' do
-        end
-      CONTROLLER
-      controller_path = APP_ROOT.join('app', 'controllers', "#{ENV['NOUN']}.rb")
-      File.write(controller_path, file_contents)
+  task :controller do
+    unless ENV.has_key?('NOUN')
+      raise "Must specify controller name, e.g., rake generate:controller NOUN=category"
     end
-    
+
+    require 'active_support/inflector'
+    noun = ActiveSupport::Inflector.pluralize(ENV['NOUN'])
+
+    file_contents = <<-CONTROLLER
+# get a list of #{noun}
+get '/#{noun}' do
+end
+# get a form to add a new #{noun}
+get '/#{noun}/new' do
+end
+# add a new #{noun}
+post '/#{noun}' do
+end
+# get a specific instance of #{noun}
+get '/#{noun}/:id' do
+end
+# get a form to edit a specific instance of #{noun}
+get '/#{noun}/:id/edit' do
+end
+# edit a specific instance of #{noun}
+put '/#{noun}/:id' do
+end
+# delete a specific instance of #{noun}
+delete '/#{noun}/:id' do
+end
+    CONTROLLER
+    controller_path = APP_ROOT.join('app', 'controllers', "#{ENV['NOUN']}.rb")
+    File.write(controller_path, file_contents)
+  end
+
   desc "Create an empty model in app/models, e.g., rake generate:model NAME=User"
   task :model do
     unless ENV.has_key?('NAME')
@@ -59,9 +59,9 @@ namespace :generate do
     puts "Creating #{model_path}"
     File.open(model_path, 'w+') do |f|
       f.write(<<-EOF.strip_heredoc)
-        class #{model_name} < ActiveRecord::Base
-          # Remember to create a migration!
-        end
+      class #{model_name} < ActiveRecord::Base
+        # Remember to create a migration!
+      end
       EOF
     end
   end
@@ -83,10 +83,10 @@ namespace :generate do
     puts "Creating #{path}"
     File.open(path, 'w+') do |f|
       f.write(<<-EOF.strip_heredoc)
-        class #{name} < ActiveRecord::Migration
-          def change
-          end
+      class #{name} < ActiveRecord::Migration
+        def change
         end
+      end
       EOF
     end
   end
@@ -108,14 +108,14 @@ namespace :generate do
     puts "Creating #{path}"
     File.open(path, 'w+') do |f|
       f.write(<<-EOF.strip_heredoc)
-        require 'spec_helper'
+      require 'spec_helper'
 
-        describe #{name} do
-          pending "add some examples to (or delete) #{__FILE__}"
-        end
-      EOF
+      describe #{name} do
+      pending "add some examples to (or delete) #{__FILE__}"
     end
+    EOF
   end
+end
 
 end
 
