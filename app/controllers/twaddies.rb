@@ -8,7 +8,8 @@ get '/twaddies/new' do
 end
 # add a new twaddies
 post '/twaddies' do
-  Tweet.create(user_id: params[:session[user_id]], content: params[:message]) #user_id is not real yet
+  Tweet.create(user_id: 1, content: params[:message]) #user_id is not real yet
+  redirect '/twaddies'
 end
 # get a specific instance of twaddies
 # get '/twaddies/:id' do
