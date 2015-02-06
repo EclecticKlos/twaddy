@@ -1,1 +1,17 @@
+<% followees_tweets = [] %>
+<% User.find(params[:session][:user_id]).followees.each {|followee| followee.tweets.each {|tweet| followees_tweets << tweet}} %>
+<ul>
+  <% followees_tweets.each do |tweet| %>
+    <li><%= tweet %>/<li>
+  <% end %>
+</ul>
 
+
+
+
+
+
+who you are
+who your followers are (User.followers.tweets)
+show all their tweets
+tweets of the people you follow
