@@ -1,0 +1,10 @@
+<h1>HI <%= @user.username %> !</h1>
+<% followees_tweets = [] %>
+<h1>Your Followees' Twadds!</h1>
+<% @user.followees.each {|followee| followee.tweets.each {|tweet| followees_tweets << tweet}} %>
+<ol>
+  <% followees_tweets.each do |tweet| %>
+    <li><b><%= (User.find(tweet.user_id)).username %></b>
+      <p><%= tweet.content %></li></p>
+  <% end %>
+</ol>
